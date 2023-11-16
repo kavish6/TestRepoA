@@ -3,7 +3,8 @@ on:
   push:
     paths:
       - "tester.txt"
-    tags: []
+    branches:
+      - "**"
 jobs:
   increment-and-release:
     runs-on: ubuntu-latest
