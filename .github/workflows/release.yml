@@ -31,5 +31,5 @@ jobs:
         run: |
           # Create the release using the incremented version
           gh release create v${{ steps.increment_version.outputs.version }} -t "Release v${{ steps.increment_version.outputs.version }}" -n "Release notes for v${{ steps.increment_version.outputs.version }}" -F path/to/changelog.md
-        with:
+        env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
