@@ -9,16 +9,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Set up GitHub CLI
-        uses: actions/setup-gh@v0
-        with:
-          GH_TOKEN: ${{ secrets.PAT }}
       - name: Get Latest Release Version
         id: get_version
         run: |
           # Get the latest release version
           RELEASE_VERSION=$(gh release view  --json tagName --jq '.tagName')
           echo "::set-output name=version::${RELEASE_VERSION}"
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
       - name: Increment Version
         id: increment_version
         run: |
