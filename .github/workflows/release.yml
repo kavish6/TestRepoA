@@ -17,7 +17,7 @@ jobs:
         id: get_version
         run: |
           # Get the latest release version
-          RELEASE_VERSION=$(gh release list --limit 1 --format "{{.TagName}}")
+          RELEASE_VERSION=$(gh release view  --json tagName --jq '.tagName')
           echo "::set-output name=version::${RELEASE_VERSION}"
 
       - name: Increment Version
