@@ -4,7 +4,7 @@ on:
     paths:
       - "tester.txt"
     tags:
-      - "*"
+      - []
 jobs:
   increment-and-release:
     runs-on: ubuntu-latest
