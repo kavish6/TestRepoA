@@ -1,0 +1,41 @@
+name: Increment and Create Release
+
+on:
+  push:
+    paths:
+      - "tester.txt"
+
+jobs:
+  increment-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Get Latest Release Version
+        id: get_version
+        run: |
+          # Get the latest release version
+          RELEASE_VERSION=$(gh release list --limit 1 --format "{{.TagName}}")
+          echo "::set-output name=version::${RELEASE_VERSION}"
+
+      - name: Increment Version
+        id: increment_version
+        run: |
+          # Increment the version
+          PREVIOUS_VERSION="${{ steps.get_version.outputs.version }}"
+          IFS='.' read -ra PARTS <<< "$PREVIOUS_VERSION"
+          MAJOR="${PARTS[0]}"
+          MINOR="${PARTS[1]}"
+          PATCH="${PARTS[2]}"
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          echo "::set-output name=version::${NEW_VERSION}"
+
+      - name: Create Release
+        run: |
+          # Create the release using the incremented version
+          gh release create v${{ steps.increment_version.outputs.version }} -t "Release v${{ steps.increment_version.outputs.version }}" -n "Release notes for v${{ steps.increment_version.outputs.version }}" -F path/to/changelog.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
