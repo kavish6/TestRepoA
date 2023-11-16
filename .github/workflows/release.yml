@@ -19,7 +19,8 @@ jobs:
           # Get the latest release version
           RELEASE_VERSION=$(gh release view  --json tagName --jq '.tagName')
           echo "::set-output name=version::${RELEASE_VERSION}"
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
       - name: Increment Version
         id: increment_version
         run: |
@@ -32,9 +33,11 @@ jobs:
           PATCH=$((PATCH + 1))
           NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
           echo "::set-output name=version::${NEW_VERSION}"
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
       - name: Create Release
         run: |
           # Create the release using the incremented version
           gh release create v${{ steps.increment_version.outputs.version }} -t "Release v${{ steps.increment_version.outputs.version }}" -n "Release notes for v${{ steps.increment_version.outputs.version }}" -F path/to/changelog.md
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
