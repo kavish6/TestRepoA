@@ -32,6 +32,6 @@ jobs:
       - name: Create Release
         run: |
           # Create the release using the incremented version
-          gh release create v${{ steps.increment_version.outputs.version }} -t "Release v${{ steps.increment_version.outputs.version }}" -n
+          gh release create v${{ steps.increment_version.outputs.version }} -t "v${{ steps.increment_version.outputs.version }}"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
