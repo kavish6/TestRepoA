@@ -16,3 +16,4 @@ jobs:
           GH_PAT: ${{ secrets.PAT }}
           COMMIT_BODY: This is created due to changes in the flagright SDK, syncing changes
           SKIP_PR: true
+          ORIGINAL_MESSAGE: true
