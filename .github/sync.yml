@@ -1,3 +1,3 @@
-- kavish6/TestRepoB:
-    - source: tester.txt
-      dest: testing.txt
+kavish6/TestRepoB:
+  - source: tester.txt
+    dest: testing.txt
