@@ -14,7 +14,7 @@ jobs:
       - name: Get Latest Release Version
         id: get_version
         run: |
-        RELEASE_VERSION=$(gh release view  --json tagName --jq '.tagName')
+          RELEASE_VERSION=$(gh release view  --json tagName --jq '.tagName')
           echo "::set-output name=version::${RELEASE_VERSION}"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
@@ -31,6 +31,6 @@ jobs:
           echo "::set-output name=version::${NEW_VERSION}"
       - name: Create Release
         run: |
-        gh release create ${{ steps.increment_version.outputs.version }} -t "${{ steps.increment_version.outputs.version }}"
+          gh release create ${{ steps.increment_version.outputs.version }} -t "${{ steps.increment_version.outputs.version }}"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
