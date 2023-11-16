@@ -9,6 +9,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Set up GitHub CLI
+        uses: actions/setup-gh@v0
+        with:
+          GH_TOKEN: ${{ secrets.PAT }}
       - name: Get Latest Release Version
         id: get_version
         run: |
