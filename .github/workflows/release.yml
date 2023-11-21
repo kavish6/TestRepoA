@@ -31,7 +31,7 @@ jobs:
           echo "::set-output name=version::${NEW_VERSION}"
       - name: Create Release
         run: |
-          echo "${{gitub.event.head_commit.message}}"
+          echo "${{github.event.head_commit.message}}"
           gh release create ${{ steps.increment_version.outputs.version }} -t "${{ steps.increment_version.outputs.version }}"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
