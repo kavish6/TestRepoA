@@ -32,6 +32,6 @@ jobs:
       - name: Create Release
         run: |
           gh release create ${{ steps.increment_version.outputs.version }} -t "${{ steps.increment_version.outputs.version }}"
-          echo "${{gitub.event.head_commit.message}}"
+          # echo "${{gitub.event.head_commit.message}}"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
