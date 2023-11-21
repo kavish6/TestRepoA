@@ -28,7 +28,7 @@ jobs:
           PATCH="${PARTS[2]}"
           PATCH=$((PATCH + 1))
           COMMIT_BODY=$(echo "${{github.event.head_commit.message}}" | tail -n +2)
-          NEW_VERSION="${MAJOR}.$((${COMMIT_BODY}=='patch'&& ${MINOR}.${PATCH+1} || ${MINOR+1}.${0}))"
+          NEW_VERSION="${MAJOR}.$((${COMMIT_BODY}=='patch'&& ${MINOR}.$((PATCH+1)) || $((MINOR+1)).0))"
           echo "::set-output name=version::${NEW_VERSION}"
       - name: Create Release
         run: |
