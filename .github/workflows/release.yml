@@ -31,6 +31,7 @@ jobs:
           echo "::set-output name=version::${NEW_VERSION}"
       - name: Create Release
         run: |
+          echo ""${{github.event.head_commit.message}}""
           IFF='\n' read -ra message <<< "${{github.event.head_commit.message}}"
           echo "${message[0]}"
           echo "${message[1]}"
