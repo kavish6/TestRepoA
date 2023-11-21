@@ -33,6 +33,8 @@ jobs:
         run: |
           commit_title=$(echo "${{github.event.head_commit.message}}" | head -n 1)
           commit_body=$(echo "${{github.event.head_commit.message}}" | tail -n +2)
+          echo "${commit_title}"
+          echo "${commit_body}" 
           # gh release create ${{ steps.increment_version.outputs.version }} -t "${{ steps.increment_version.outputs.version }}"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
