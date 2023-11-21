@@ -27,10 +27,11 @@ jobs:
           MINOR="${PARTS[1]}"
           PATCH="${PARTS[2]}"
           PATCH=$((PATCH + 1))
-          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH+1}"
           echo "::set-output name=version::${NEW_VERSION}"
       - name: Create Release
         run: |
           gh release create ${{ steps.increment_version.outputs.version }} -t "${{ steps.increment_version.outputs.version }}"
+          echo "::set-output ${{gitub.event.head_commit.message}}"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
