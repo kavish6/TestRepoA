@@ -31,10 +31,8 @@ jobs:
           echo "::set-output name=version::${NEW_VERSION}"
       - name: Create Release
         run: |
-          IFS="" echo "${{github.event.head_commit.message}}"
-          read -ra message <<< "${{github.event.head_commit.message}}"
-          echo "${message[0]}"
-          echo "${message[@]:1}"
+          commit_title=$(echo "${{github.event.head_commit.message}}" | head -n 1)
+          commit_body=$(echo "${{github.event.head_commit.message}}" | tail -n +2)
           # gh release create ${{ steps.increment_version.outputs.version }} -t "${{ steps.increment_version.outputs.version }}"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
