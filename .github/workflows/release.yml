@@ -26,9 +26,7 @@ jobs:
           MAJOR="${PARTS[0]}"
           MINOR="${PARTS[1]}"
           PATCH="${PARTS[2]}"
-          COMMIT_BODY=$(echo "${{github.event.head_commit.message}}" | tail -n +3)
-          echo "commit body should be below"
-          echo "${COMMIT_BODY}"
+          COMMIT_BODY=$(echo "${{github.event.head_commit.message}}" | tail -n +2 | tail -n 1))
           if [ "${COMMIT_BODY}" == "patch" ]; then
           PATCH=$((PATCH + 1))
           else
