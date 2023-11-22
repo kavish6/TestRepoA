@@ -26,15 +26,15 @@ jobs:
           MAJOR="${PARTS[0]}"
           MINOR="${PARTS[1]}"
           PATCH="${PARTS[2]}"
-          COMMIT_BODY=$(echo "${{github.event.head_commit.message}}" | tail -n +2)
+          COMMIT_BODY=$(echo "${{github.event.head_commit.message}}" | tail -n +3)
           echo "commit body should be below"
           echo "${COMMIT_BODY}"
-          if [ "$COMMIT_BODY" == "patch" ]; then
+          if [ "${COMMIT_BODY}" == "patch" ]; then
           PATCH=$((PATCH + 1))
           else
           PATCH=0
           fi
-          if [ "$COMMIT_BODY" != "patch" ]; then
+          if [ "${COMMIT_BODY}" != "patch" ]; then
           MINOR=$((MINOR + 1))
           fi       
           NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
