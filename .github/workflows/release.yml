@@ -33,7 +33,7 @@ jobs:
           else
           PATCH=0
           fi
-          if [ "$COMMIT_BODY" = "minor" ]; then
+          if [ "$COMMIT_BODY" != "patch" ]; then
           MINOR=$((MINOR + 1))
           fi       
           NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
