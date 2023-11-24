@@ -4,7 +4,8 @@ on:
     paths:
       - "tester.txt"
     branches:
-      - "**"
+      - main
+      - "*.*.*"
 jobs:
   increment-and-release:
     runs-on: ubuntu-latest
